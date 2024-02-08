@@ -1,5 +1,7 @@
 package io.github.shotoh;
 
+import javax.swing.*;
+
 public class EightQueens {
     public static void main(String[] args) {
         int[][] board = new int[8][8];
@@ -46,11 +48,9 @@ public class EightQueens {
     }
 
     private static void printBoard(int[][] board) {
-        for (int[] i : board) {
-            for (int j = 0; j < board[0].length; j++) {
-                System.out.print(i[j] + " ");
-            }
-            System.out.println();
-        }
+        SwingUtilities.invokeLater(() -> {
+            ChessBoard chessBoard = new ChessBoard(board);
+            chessBoard.setVisible(true);
+        });
     }
 }
