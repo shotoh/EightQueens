@@ -13,25 +13,30 @@ public class EightQueens {
         }
     }
 
+    // recursive function to solve each row, backtrack when needed
     private static boolean solve(int[][] board, int row) {
-        if (row == board.length) return true;
+        if (row == board.length) return true; // base case
         for (int j = 0; j < board[row].length; j++) {
             if (safe(board, row, j)) {
-                board[row][j] = 1;
+                board[row][j] = 1; // 1 represents a queen
                 if (solve(board, row + 1)) return true;
-                board[row][j] = 0;
+                board[row][j] = 0; // backtracks
             }
         }
         return false;
     }
 
+    // checks if a specific spot is safe from queens
     private static boolean safe(int[][] board, int row, int col) {
         int i, j;
+        // checks all spots above the row
+        // rows below do not have queens
         for (i = 0; i < row; i++) {
             if (board[i][col] == 1) return false;
         }
         i = row;
         j = col;
+        // checks all spots top-left diagonal
         while (i >= 0 && j >= 0) {
             if (board[i][j] == 1) return false;
             i--;
@@ -39,6 +44,7 @@ public class EightQueens {
         }
         i = row;
         j = col;
+        // checks all spots top-right diagonal
         while (i >= 0 && j < board[0].length) {
             if (board[i][j] == 1) return false;
             i--;
